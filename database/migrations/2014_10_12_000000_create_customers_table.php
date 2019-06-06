@@ -15,10 +15,11 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('cpf')->unique();
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('name', 255);
+            $table->string('cpf', 50)->unique();
+            $table->string('email', 255)->unique();
+            $table->string('password', 255);
+            $table->string('api_token', 255);
             $table->rememberToken();
             $table->timestamps();
         });

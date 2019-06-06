@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\OrderItem;
+use App\Ecommerce\V1\Infrastructure\Models\OrderItem;
 
 class OrderItemsTableSeeder extends Seeder
 {

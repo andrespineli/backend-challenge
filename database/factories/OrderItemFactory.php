@@ -1,9 +1,9 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\Models\OrderItem;
-use App\Models\Order;
-use App\Models\Product;
+use App\Ecommerce\V1\Infrastructure\Models\OrderItem;
+use App\Ecommerce\V1\Infrastructure\Models\Order;
+use App\Ecommerce\V1\Infrastructure\Models\Product;
 
 $factory->define(OrderItem::class, function (Faker $faker) {
 

@@ -4,12 +4,13 @@
 
 $router->group(['prefix' => 'v1', 'middleware' => ['cors', 'auth:api']], function () use ($router) {
 
-	$router->post('/rewards', 'RewardController@create');               
+	$router->get('/customers', 'CustomerController@get');            
 
 });
 
 $router->group(['prefix' => 'v1', 'middleware' => []], function () use ($router) {         
     
-      $router->post('accounts/signin', 'AccountController@signin');
+    $router->post('/customers', 'CustomerController@new');
+    $router->post('/login', 'CustomerController@logIn');
     
 });

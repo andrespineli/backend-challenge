@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Ecommerce\V1\Infrastructure\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,6 +19,7 @@ class Customer extends Authenticatable
         'cpf', 
         'email',
         'password',
+        'api_token'
     ];
 
     /**
@@ -27,6 +28,8 @@ class Customer extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token'
+        'password', 
+        'api_token',
+        'remember_token'
     ];
 }

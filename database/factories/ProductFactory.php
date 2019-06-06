@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 use Faker\Provider\Lorem;
-use App\Models\Product;
+use App\Ecommerce\V1\Infrastructure\Models\Product;
 
 $factory->define(Product::class, function (Faker $faker) {
 

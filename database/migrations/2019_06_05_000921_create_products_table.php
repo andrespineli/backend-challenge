@@ -16,8 +16,8 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sku')->unique();
-            $table->string('name')->unique();
-            $table->double('price')->unique();           
+            $table->string('name', 255)->unique();
+            $table->double('price');           
             $table->timestamps();
         });
     }

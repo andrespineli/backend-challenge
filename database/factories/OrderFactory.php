@@ -1,8 +1,8 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\Models\Order;
-use App\Models\Customer;
+use App\Ecommerce\V1\Infrastructure\Models\Order;
+use App\Ecommerce\V1\Infrastructure\Models\Customer;
 
 $factory->define(Order::class, function (Faker $faker) {
 
