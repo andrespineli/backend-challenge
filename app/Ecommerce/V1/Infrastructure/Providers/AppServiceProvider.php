@@ -37,5 +37,15 @@ class AppServiceProvider extends ServiceProvider
             'App\Ecommerce\V1\Components\Auth\AuthComponent',
             'App\Ecommerce\V1\Components\Auth\Auth'
         );
+
+        $this->app->bind(
+            'App\Ecommerce\V1\Components\Product\ProductRepository',
+            'App\Ecommerce\V1\Components\Product\EloquentProductRepository'
+        );
+
+        $this->app->bind(
+            'App\Ecommerce\V1\Components\Product\ProductComponent',
+            'App\Ecommerce\V1\Components\Product\Product'
+        );
     }
 }

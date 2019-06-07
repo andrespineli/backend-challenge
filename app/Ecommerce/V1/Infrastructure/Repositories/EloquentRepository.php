@@ -18,7 +18,7 @@ abstract class EloquentRepository implements Repository
         return $this->findById($data['id']);
     }
 
-    public function getAll() : object
+    public function all() : object
     {
        return $this->entity->all();
     }

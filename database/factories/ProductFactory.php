@@ -9,10 +9,9 @@ $factory->define(Product::class, function (Faker $faker) {
     $faker->addProvider(new Lorem($faker));
    
     return [     
-        'sku' => $faker->randomNumber(5),
+        'sku' => mt_rand(0000000000000000, 9999999999999999),
         'name' => $faker->word,
         'price' => $faker->randomFloat(2, 100, 1000)
     ];
 
 });
-
