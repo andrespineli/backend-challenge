@@ -19,7 +19,7 @@ class CreateCustomersTable extends Migration
             $table->string('cpf', 50)->unique();
             $table->string('email', 255)->unique();
             $table->string('password', 255);
-            $table->string('api_token', 255);
+            $table->string('api_token', 255)->nuallble(true)->default('null');
             $table->rememberToken();
             $table->timestamps();
         });

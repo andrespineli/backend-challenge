@@ -11,6 +11,6 @@ $router->group(['prefix' => 'v1', 'middleware' => ['cors', 'auth:api']], functio
 $router->group(['prefix' => 'v1', 'middleware' => []], function () use ($router) {         
     
     $router->post('/customers', 'CustomerController@new');
-    $router->post('/login', 'CustomerController@logIn');
+    $router->post('/login', 'AuthController@logIn');
     
 });

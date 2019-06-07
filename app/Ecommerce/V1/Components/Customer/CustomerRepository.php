@@ -4,8 +4,9 @@ namespace App\Ecommerce\V1\Components\Customer;
 
 interface CustomerRepository
 {
-    public function create($customer) : Array;
-    public function update($customer) : Array;
-    public function getAll() : Array;
-    public function findByEmail($email) : Array;
+    public function create($customer) : object;
+    public function update($customer) : object;
+    public function getAll() : object;
+    public function findByEmail($email) : object;
+    public function findById($id) : object;
 }
