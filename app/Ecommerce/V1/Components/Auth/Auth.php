@@ -28,7 +28,7 @@ class Auth implements AuthComponent
             return ['error' => 'Authentication failure.'];
         }
 
-        return ['api_token' => $token];
+        return ['api_token' => $auth['api_token']];
     }
 
     public function generateToken() : string

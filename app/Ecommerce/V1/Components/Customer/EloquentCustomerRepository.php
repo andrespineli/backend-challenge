@@ -23,6 +23,15 @@ class EloquentCustomerRepository extends EloquentRepository implements CustomerR
                     ->toArray();
     }
 
+    public function update(array $data) : array
+    {
+        $customer = $this->entity->find($data['id']);  
+        $customer->update($data);     
+        return $this->entity->find($data['id'])
+                            ->makeVisible('api_token')
+                            ->toArray();       
+    }
+
     public function findByEmail(string $email) : array
     {
         return $this->entity
