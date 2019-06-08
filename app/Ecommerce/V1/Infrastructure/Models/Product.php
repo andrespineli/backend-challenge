@@ -12,10 +12,18 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'sku',
         'name',
         'price'
     ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [];
     
 }
 

@@ -12,12 +12,31 @@ class OrderItem extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'order_id',
         'product_id',
         'amount',
         'price_unit',
         'total'
     ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'id',
+        'order_id',
+        'product_id',
+        'created_at',
+        'updated_at'
+    ];
+
+    public function product()
+    {
+        return $this->hasOne('App\Ecommerce\V1\Infrastructure\Models\Product', 'id', 'product_id');
+    }
     
 }
 

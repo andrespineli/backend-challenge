@@ -34,6 +34,11 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'App\Ecommerce\V1\Components\Auth\AuthRepository',
+            'App\Ecommerce\V1\Components\Auth\LaravelAuthRepository'
+        );
+
+        $this->app->bind(
             'App\Ecommerce\V1\Components\Auth\AuthComponent',
             'App\Ecommerce\V1\Components\Auth\Auth'
         );
@@ -46,6 +51,26 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Ecommerce\V1\Components\Product\ProductComponent',
             'App\Ecommerce\V1\Components\Product\Product'
+        );
+
+        $this->app->bind(
+            'App\Ecommerce\V1\Components\Order\OrderRepository',
+            'App\Ecommerce\V1\Components\Order\EloquentOrderRepository'
+        );
+
+        $this->app->bind(
+            'App\Ecommerce\V1\Components\Order\OrderComponent',
+            'App\Ecommerce\V1\Components\Order\Order'
+        );
+
+        $this->app->bind(
+            'App\Ecommerce\V1\Components\OrderItem\OrderItemRepository',
+            'App\Ecommerce\V1\Components\OrderItem\EloquentOrderItemRepository'
+        );
+
+        $this->app->bind(
+            'App\Ecommerce\V1\Components\OrderItem\OrderItemComponent',
+            'App\Ecommerce\V1\Components\OrderItem\OrderItem'
         );
     }
 }

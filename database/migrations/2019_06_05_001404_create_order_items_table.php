@@ -20,8 +20,8 @@ class CreateOrderItemsTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
             $table->integer('amount');
-            $table->double('price_unit');
-            $table->double('total');
+            $table->double('price_unit', 8, 2);
+            $table->double('total', 8, 2);
             $table->timestamps();
         });
     }

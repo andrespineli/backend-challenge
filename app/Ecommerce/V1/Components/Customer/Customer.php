@@ -13,28 +13,30 @@ class Customer implements CustomerComponent
         $this->repository = $repository;
     }
 
-    public function newCustomer($customer)
+    public function newCustomer(array $customer) : array
     {
         return $this->repository->create($customer);
     }
 
-    public function updateCustomer()
-    { }
-
-    public function getCustomers()
+    public function getCustomers() : array
     {
         return $this->repository->all();
     }
 
-    public function getCustomerByEmailAndPass($email, $pass)
+    public function getCustomerByEmailAndPass(string $email, string $pass) : array
     {
         return $this->repository->findByEmail($email);            
     }
 
-    public function setAuthToken($customerId, $token)
+    public function getCustmerByCpf(string $cpf) : array
     {
-        $customer = $this->repository->findById($customerId);
-        $data['id'] = $customer->id;
+        return $this->repository->findByCpf($cpf);    
+    }
+
+    public function setAuthToken(int $customerId, string $token) : array
+    {
+        $customer = $this->repository->findById($customerId);     
+        $data['id'] = $customer['id'];
         $data['api_token'] = $token;
         return $this->repository->update($data);
     }

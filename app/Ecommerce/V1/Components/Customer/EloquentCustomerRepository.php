@@ -15,10 +15,27 @@ class EloquentCustomerRepository extends EloquentRepository implements CustomerR
         $this->entity = $entity;
     }
 
-    public function findByEmail($email) : object
+    public function create(array $customer) : array
+    {
+        return $this->entity
+                    ->create($customer)
+                    ->makeVisible('password')
+                    ->toArray();
+    }
+
+    public function findByEmail(string $email) : array
     {
         return $this->entity
                     ->where('email', '=', $email)
-                    ->firstOrFail();            
+                    ->firstOrFail()
+                    ->toArray();            
+    }   
+
+    public function findByCpf(string $cpf) : array
+    {
+        return $this->entity
+                    ->where('cpf', '=', $cpf)
+                    ->firstOrFail()
+                    ->toArray();            
     }   
 }

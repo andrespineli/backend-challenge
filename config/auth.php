@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'api',
-        'passwords' => 'customers',
+        'passwords' => 'users',
     ],
 
     /*
@@ -65,6 +65,11 @@ return [
     */
 
     'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Ecommerce\V1\Infrastructure\Models\Customer::class,
+        ],
+
         'customers' => [
             'driver' => 'eloquent',
             'model' => App\Ecommerce\V1\Infrastructure\Models\Customer::class,
@@ -92,8 +97,8 @@ return [
     */
 
     'passwords' => [
-        'customers' => [
-            'provider' => 'customers',
+        'users' => [
+            'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
         ],
