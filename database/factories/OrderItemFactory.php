@@ -7,23 +7,21 @@ use App\Ecommerce\V1\Infrastructure\Models\Product;
 
 $factory->define(OrderItem::class, function (Faker $faker) {
 
-    $order = Order::orderByRaw('RAND()')->first();
-    $items = rand(1, 5);
+    factory(Product::class, 5)->create();
 
-    for ($i = 0; $i < $items; $i++) {
+    $order = Order::find(rand(1, Order::count()))->first();    
+    $amount = rand(1, 5);
+    $product = Product::find(rand(1, Product::count()))->first();
+    $total = $product->price * $amount;
+    $order->total = $order->total + $total;
+    $order->save();
 
-        $amount = rand(1, 5);
-        $product = Product::orderByRaw('RAND()')->first();
-        $total = $product->price * $amount;
-        $order->total = $order->total + $total;
-        $order->save();
-
-        return [
-            'order_id' => $order->id,
-            'product_id' => $product->id,
-            'amount' => $amount,
-            'price_unit' => $product->price,
-            'total' => $total
-        ];
-    }
+    return [
+        'order_id' => $order->id,
+        'product_id' => $product->id,
+        'amount' => $amount,
+        'price_unit' => $product->price,
+        'total' => $total
+    ];
+    
 });
