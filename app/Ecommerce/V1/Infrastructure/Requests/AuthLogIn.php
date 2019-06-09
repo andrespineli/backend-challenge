@@ -42,13 +42,16 @@ class AuthLogIn extends FormRequest
     {
         $validator->after(function ($validator) {
 
+            if (!$this['email'] || !$this['password']) {
+                return;
+            }
+
             $validate = $this->authComponent->verifyEmailAndPass($this['email'], $this['password']);
 
             if (!$validate['email'] || !$validate['password']) {
                 $validator->errors()->add($validate['field'], $validate['message']);
                 return;
             }
-
         });
     }
 }

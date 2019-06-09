@@ -1,58 +1,128 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# < back >Developer</ end >
+API REST utilizando o Laravel 5.5 que implementa endpoints de Customers, Products e Orders.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Arquitetura
 
-## About Laravel
+Foi escolhida uma arquitetura de componentes monolítica que permite o isolamento das regras de negócio da estrutura do framework. 
+Cada componente implementa sua interface e possúi seu respectivo Repository para persistência e recuperação de informações. Às implementações concretas do componente e Repository são injetadas automaticamente pelo Service Container do Laravel invertendo a dependência e permitindo que as regras de negócio não possuam conhecimento sobre o framework ou mesmo sobre o banco de dados, torando a aplicação mais flexível e possibilitando a substituição dos componentes se for necessário além de facilitar sua migração para microsserviços caso haja a necessidade de escalar.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+## Iniciando
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Para executar esta aplicação, clone este repositório e siga as instruções abaixo:
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+### Requisitos
 
-## Learning Laravel
+Ambiente de desenvolvimento utiliza Docker e docker-compose, portanto se faz necesária sua instalação previa.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+Possuindo o ambiente configurado basta executar na raiz do projeto em um Terminal/PowerShell o comando:
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+```
+docker-compose up
+```
 
-## Laravel Sponsors
+Feito isso os containers necessários para a execução da aplicação irão subir, são eles:
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+> - challenge-webserver (Servidor web Nginx)
+> - challenge-php (PHP v7.2)
+> - challenge-mysql (Banco de Dados MySQL 5.7)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Pulse Storm](http://www.pulsestorm.net/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
+O terminal/cmd deverá permanecer aberto durante a execução da aplicação.
 
-## Contributing
+Também sendo possível a execução como uma deamon (segundo plano) acrescentando -d ao comando anterior: 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+docker-compose up -d
+```
 
-## Security Vulnerabilities
+Devido a utilização do Docker os comandos do Laravel como o "php artisan" deverão ser executados no container challenge-php
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Instalando dependencias
 
-## License
+O Laravel gerencia suas dependencias através do Composer
+As dependencias do projeto devem ser instaladas através do comando:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+docker exec -it challenge-php composer install
+```
+
+### Executando as Migrations
+
+Migrations são responsáveis pela criação da base de dados:
+
+```
+docker exec -it challenge-php php artisan migrate
+```
+
+Atualizando as migrations:
+
+```
+docker exec -it challenge-php php artisan migrate:refresh
+```
+
+### Executando os testes
+
+Foram implementados testes unitários e de integração (Rotas da API)
+Para rodar os testes basta executar o PHPUnit:
+
+```
+docker exec -it challenge-php php vendor/bin/phpunit
+```
+
+### Populando o Banco de Dados
+
+Seeds permitem a inserção de dados para facilitar o desenvolvimento e testes:
+
+```
+docker exec -it challenge-php php artisan db:seed
+```
+
+## Endpoints
+Recursos disponíveis na API. 
+Necessário o envio do Header: 
+
+```
+Accept: application/json
+```
+
+### Campos obrigatórios
+Para saber quais dados são necessários enviar para cada endpoint, basta realizar uma requisição que a API deverá retornar um erro informando quais campos são obrigatórios e validar seus respectivos tipos.
+
+### Autenticação
+Algumas rotas são públicas, outras necessitam de autenticação. Ao cadastrar um Customer ou realizar login a API retornará um token de que deverá ser incluido no header das requisições:
+
+```
+Authoriztion: Bearer seuTokenDeAutenticacaoAqui
+```
+
+### Auth
+
+Realizar login (pública):
+> - POST: /api/v1/login
+
+### Customer
+
+Listar todos os customers cadastrados (autenticada):
+> - GET: /api/v1/customers
+
+Cadastrar um novo customer (pública)
+> - POST: /api/v1/customers
+
+### Products
+
+Listar todos os products cadastrados (pública):
+> - GET: /api/v1/products
+
+Cadastrar um novo product (autenticada)
+> - POST: /api/v1/customers
+
+### Orders
+
+Listar todos os orders realizados (autenticada):
+> - GET: /api/v1/orders
+
+Realizar um novo order (autenticada)
+> - POST: /api/v1/orders
+
+Cancelar um order específico (autenticada)
+> - PUT: /api/v1/orders/{order_id}
+
