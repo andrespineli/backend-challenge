@@ -38,6 +38,10 @@ Também sendo possível a execução como uma deamon (segundo plano) acrescentan
 docker-compose up -d
 ```
 
+A primeira execução poderá demorar alguns minutos devido ao download das imagens necessárias.
+
+Após o término o terminal devera exibir "done" para cada container. A URL de acesso deverá ser http://localhost:8000. Caso já possua algum serviço na porta 8000, poderá altera-la no arquivo docker-compose.yml.
+
 Caso o ambiente utilizado seja linux, poderá ser necessário a execução dos comandos como sudo, além de conceder permissões no sistema de arquivos para execução correta do Laravel.
 
 Já em ambientes windows poderá ser necessário a utilização do prefixo winpty nos comandos docker.
