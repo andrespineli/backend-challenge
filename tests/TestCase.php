@@ -15,13 +15,21 @@ abstract class TestCase extends BaseTestCase
 
     public function setUp()
     {
-    	parent::setUp();
-    	$this->faker = Faker::create();    	
+        parent::setUp();
+        $this->faker = Faker::create();
     }
 
     public function tearDown()
     {
         $this->artisan('migrate:reset');
         parent::tearDown();
+    }
+
+    public function invokePrivateMethod(object $object, string $methodName, array $parameters = [])
+    {
+        $reflection = new \ReflectionClass(get_class($object));
+        $method = $reflection->getMethod($methodName);
+        $method->setAccessible(true);
+        return $method->invokeArgs($object, $parameters);
     }
 }

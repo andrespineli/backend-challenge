@@ -74,4 +74,48 @@ class OrderTest extends TestCase
         $canceled = $this->orderComponent->cancelOrder($order['id']);
         $this->assertEquals($canceled['status'], 'CANCELED');
     }
+
+    public function testItCanGetItemsFromOrder()
+    {
+        $products = factory(Product::class, 5)->create()
+            ->toArray();
+        $orderId = factory(Order::class)->create()->toArray()['id'];
+
+        foreach ($products as $product) {
+            $item['sku'] = $product['sku'];
+            $item['amount'] = rand(1, 5);
+            $items[] = $item;
+        }
+
+        $items = $this->invokePrivateMethod($this->orderComponent, 'getItemsFromOrder', [
+            'requestItems' => $items,
+            'orderId' => $orderId
+        ]);
+
+        foreach ($items as $item) {
+            $this->assertArrayHasKey('order_id', $item);
+            $this->assertArrayHasKey('amount', $item);
+            $this->assertArrayHasKey('product_id', $item);
+            $this->assertArrayHasKey('price_unit', $item);
+            $this->assertArrayHasKey('total', $item);
+            $total = $item['amount'] * $item['price_unit'];
+            $this->assertEquals($total, $item['total']);
+        }
+    }
+
+    public function testItCanGetOrderTotalPriceOfItems()
+    {
+        $orderItems = factory(OrderItem::class, 5)->make()
+            ->toArray();
+
+        $total = array_sum(array_map(function ($value) {
+            return $value['total'];
+        }, $orderItems));
+
+        $price = $this->invokePrivateMethod($this->orderComponent, 'getOrderTotalPriceOfItems', [
+            'items' => $orderItems
+        ]);
+
+        $this->assertEquals($total, $price);
+    }
 }
