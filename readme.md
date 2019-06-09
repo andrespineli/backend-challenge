@@ -61,8 +61,8 @@ docker exec -it challenge-php php artisan migrate:refresh
 
 ### Executando os testes
 
-Foram implementados testes unitários e de integração (Rotas da API)
-Para rodar os testes basta executar o PHPUnit:
+Foram implementados testes unitários e de integração (Rotas da API).
+Para executar a suite de testes basta utilizar o PHPUnit:
 
 ```
 docker exec -it challenge-php php vendor/bin/phpunit
@@ -98,7 +98,7 @@ Authoriztion: Bearer seuTokenDeAutenticacaoAqui
 
 Realizar login (pública):
 > - POST: /api/v1/login
-```
+```json
 {
     "email": "seuemail@email.com",
     "password: "suasenha"
@@ -112,7 +112,7 @@ Listar todos os customers cadastrados (autenticada):
 
 Cadastrar um novo customer (pública)
 > - POST: /api/v1/customers
-```
+```json
 {
     "name": "Seu nome",
     "cpf": "00000000000",
@@ -128,7 +128,7 @@ Listar todos os products cadastrados (pública):
 
 Cadastrar um novo product (autenticada)
 > - POST: /api/v1/products
-```
+```json
 {
     "sku": "8552515751438644",
     "name": "Casaco Jaqueta Outletdri Inverno Jacquard",
@@ -145,9 +145,8 @@ Realizar um novo order (autenticada)
 > - POST: /api/v1/orders
 
 O endpoint de pedidos aceita uma lista de "items" que deverá conter a estrutura abaixo.
-Utilizando o Postman deverá ser enviado como "raw" do tipo JSON(application/json)
- 
-```
+Utilizando o Postman deverá ser enviado como "raw" do tipo JSON(application/json).
+```json
 {
     "items": [
         {
