@@ -43,17 +43,12 @@ class Auth implements AuthComponent
         return $this->repository->getAuthEntity();
     }
 
-    public function hashPassword($password)
+    public function hashPassword(string $password): string
     {
         return $this->repository->hashPassword($password);
     }
 
-    public function verifyHashPassword($password, $hashedPass)
-    {
-        return $this->repository->verifyHashPassword($password, $hashedPass);
-    }
-
-    public function verifyEmailAndPass($email, $pass)
+    public function verifyEmailAndPass(string $email, string $pass): array
     {
         try {
             $customer = $this->customerComponent->getCustomerByEmail($email);
