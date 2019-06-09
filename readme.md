@@ -4,7 +4,7 @@ API REST utilizando o Laravel 5.5 que implementa endpoints de Customers, Product
 ## Arquitetura
 
 Foi escolhida uma arquitetura de componentes monolítica que permite o isolamento das regras de negócio da estrutura do framework. 
-Cada componente implementa sua interface e possúi seu respectivo Repository para persistência e recuperação de informações. Às implementações concretas do componente e Repository são injetadas automaticamente pelo Service Container do Laravel invertendo a dependência e permitindo que as regras de negócio não possuam conhecimento sobre o framework ou mesmo sobre o banco de dados, torando a aplicação mais flexível e possibilitando a substituição dos componentes se for necessário além de facilitar sua migração para microsserviços caso haja a necessidade de escalar.
+Cada componente implementa sua interface e possui seu respectivo Repository para persistência e recuperação de informações. Às implementações concretas do componente e Repository são injetadas automaticamente pelo Service Container do Laravel invertendo a dependência e permitindo que as regras de negócio não possuam conhecimento sobre o framework ou mesmo sobre o banco de dados, torando a aplicação mais flexível e possibilitando a substituição dos componentes se for necessário além de facilitar sua migração para microsserviços caso haja a necessidade de escalar.
 
 ## Iniciando
 
@@ -98,6 +98,12 @@ Authoriztion: Bearer seuTokenDeAutenticacaoAqui
 
 Realizar login (pública):
 > - POST: /api/v1/login
+```
+{
+    "email": "seuemail@email.com",
+    "password: "suasenha"
+}
+```
 
 ### Customer
 
@@ -106,6 +112,14 @@ Listar todos os customers cadastrados (autenticada):
 
 Cadastrar um novo customer (pública)
 > - POST: /api/v1/customers
+```
+{
+    "name": "Seu nome",
+    "cpf": "00000000000",
+    "email": "seuemail@email.com",
+    "password: "suasenha"
+}
+```
 
 ### Products
 
@@ -113,7 +127,14 @@ Listar todos os products cadastrados (pública):
 > - GET: /api/v1/products
 
 Cadastrar um novo product (autenticada)
-> - POST: /api/v1/customers
+> - POST: /api/v1/products
+```
+{
+    "sku": "8552515751438644",
+    "name": "Casaco Jaqueta Outletdri Inverno Jacquard",
+    "price": "109.90"
+}
+```
 
 ### Orders
 
@@ -122,6 +143,24 @@ Listar todos os orders realizados (autenticada):
 
 Realizar um novo order (autenticada)
 > - POST: /api/v1/orders
+O endpoint de pedidos aceita uma lista de "items" que deverá conter a estrutura abaixo.
+Utilizando o Postman deverá ser enviado como "raw" do tipo JSON(application/json)
+ 
+```
+{
+    "items": [
+        {
+            "sku": "8552515751438644",
+            "amount": 1
+        },
+        {
+            "sku": "8552515751438645",
+            "amount": 2
+            
+        }
+    ]
+}
+```
 
 Cancelar um order específico (autenticada)
 > - PUT: /api/v1/orders/{order_id}
