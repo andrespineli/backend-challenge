@@ -6,6 +6,10 @@ API REST utilizando o Laravel 5.5 que implementa endpoints de Customers, Product
 Foi escolhida uma arquitetura de componentes monolítica que permite o isolamento das regras de negócio da estrutura do framework. 
 Cada componente implementa sua interface e possui seu respectivo Repository para persistência e recuperação de informações. Às implementações concretas do componente e Repository são injetadas automaticamente pelo Service Container do Laravel invertendo a dependência e permitindo que as regras de negócio não possuam conhecimento sobre o framework ou mesmo sobre o banco de dados, torando a aplicação mais flexível e possibilitando a substituição dos componentes se for necessário além de facilitar sua migração para microsserviços caso haja a necessidade de escalar.
 
+<p align="center">
+    <img src="https://i.ibb.co/d6KhZCV/component-architeture.jpg">
+</p>
+
 ## Iniciando
 
 Para executar esta aplicação, clone este repositório e siga as instruções abaixo:
