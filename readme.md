@@ -143,6 +143,7 @@ Listar todos os orders realizados (autenticada):
 
 Realizar um novo order (autenticada)
 > - POST: /api/v1/orders
+
 O endpoint de pedidos aceita uma lista de "items" que deverá conter a estrutura abaixo.
 Utilizando o Postman deverá ser enviado como "raw" do tipo JSON(application/json)
  
