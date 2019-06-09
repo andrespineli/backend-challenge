@@ -1,0 +1,37 @@
+version: "2"
+services:
+  
+  webserver-api:
+    build: ./docker/images/webserver
+    container_name: challenge-webserver      
+    volumes:
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./:/usr/share/nginx/html
+    ports:
+      - "8000:80"
+    links:
+      - php     
+      - db
+      
+  php:
+    build: ./docker/images/php
+    container_name: challenge-php    
+    volumes:      
+      - ./:/usr/share/nginx/html         
+
+  db:
+    image: mysql:5.7
+    container_name: challenge-mysql  
+    volumes:
+      - "./docker/.data/db:/var/lib/mysql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ecommerce
+      MYSQL_USER: root        
+
+
+
+     
+        
+
