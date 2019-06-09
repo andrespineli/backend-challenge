@@ -58,7 +58,6 @@ class Order implements OrderComponent
 
             return $this->getOrder($update['id']);
         } catch (\Throwable $th) {
-
             if ($th->getCode() == 2) {
                 $this->cancelOrder($newOrder['id']);
             }

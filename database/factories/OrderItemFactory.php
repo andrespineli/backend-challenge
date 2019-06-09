@@ -8,7 +8,7 @@ use App\Ecommerce\V1\Infrastructure\Models\Product;
 $factory->define(OrderItem::class, function (Faker $faker) {
 
     factory(Product::class, 5)->create();
-    factory(Order::class, 5)->create();
+    factory(Order::class)->create();
 
     $order = Order::inRandomOrder()->first();
     $amount = rand(1, 5);
