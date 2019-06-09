@@ -11,36 +11,37 @@ class AuthTest extends TestCase
     use DatabaseMigrations;
 
     private $entity;
-    private $authComponent; 
-    
-    public function setUp() {
+    private $authComponent;
+
+    public function setUp()
+    {
         parent::setUp();
-        $this->entity = Customer::class;  
+        $this->entity = Customer::class;
         $this->authComponent = $this->app->make('App\Ecommerce\V1\Components\Auth\AuthComponent');
     }
 
-    public function test_it_can_generate_auth_token()
+    public function testItCanGenerateAuthToken()
     {
-        $token = $this->authComponent->generateToken();       
-        $this->assertNotEmpty($token);    
+        $token = $this->authComponent->generateToken();
+        $this->assertNotEmpty($token);
     }
 
-    public function test_it_can_login()
+    public function testItCanLogin()
     {
-        $customer = factory($this->entity)->create()   
-                                          ->makeVisible('password')                                         
-                                          ->toArray(); 
+        $customer = factory($this->entity)->create()
+            ->makeVisible('password')
+            ->toArray();
 
         $login = $this->authComponent->login($customer);
-        $this->assertArrayHasKey('api_token', $login); 
-        $this->assertNotEmpty($login['api_token']);                 
+        $this->assertArrayHasKey('api_token', $login);
+        $this->assertNotEmpty($login['api_token']);
     }
 
-    public function test_it_can_get_auth_entity()
+    public function testItCanGetAuthEntity()
     {
         $customer = factory($this->entity)->create();
         $this->be($customer);
-        $entity = $this->authComponent->getAuthEntity();             
-        $this->assertEquals($customer->toArray(), $entity);    
+        $entity = $this->authComponent->getAuthEntity();
+        $this->assertEquals($customer->toArray(), $entity);
     }
 }
