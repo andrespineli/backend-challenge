@@ -9,27 +9,27 @@ use App\Ecommerce\V1\Components\Order\OrderComponent;
 
 class OrderController extends Controller
 {
-    private $order; 
+    private $order;
 
-    public function __construct(OrderComponent $order) 
+    public function __construct(OrderComponent $order)
     {
         $this->order = $order;
     }
 
     public function new(OrderNew $order)
     {
-        $order = $order->validated();      
-        return $this->order->newOrder($order);       
-    } 
+        $order = $order->validated();
+        return $this->order->newOrder($order);
+    }
 
     public function get()
     {
         return $this->order->getOrders();
-    }  
+    }
 
     public function cancel(OrderCancel $request)
     {
-        $request = $request->all();      
+        $request = $request->all();
         return $this->order->cancelOrder($request['order_id']);
     }
 }

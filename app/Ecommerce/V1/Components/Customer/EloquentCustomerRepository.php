@@ -15,36 +15,36 @@ class EloquentCustomerRepository extends EloquentRepository implements CustomerR
         $this->entity = $entity;
     }
 
-    public function create(array $customer) : array
+    public function create(array $customer): array
     {
         return $this->entity
-                    ->create($customer)
-                    ->makeVisible('password')
-                    ->toArray();
+            ->create($customer)
+            ->makeVisible('password')
+            ->toArray();
     }
 
-    public function update(array $data) : array
+    public function update(array $data): array
     {
-        $customer = $this->entity->find($data['id']);  
-        $customer->update($data);     
+        $customer = $this->entity->find($data['id']);
+        $customer->update($data);
         return $this->entity->find($data['id'])
-                            ->makeVisible('api_token')
-                            ->toArray();       
+            ->makeVisible('api_token')
+            ->toArray();
     }
 
-    public function findByEmail(string $email) : array
+    public function findByEmail(string $email): array
     {
         return $this->entity
-                    ->where('email', '=', $email)
-                    ->firstOrFail()
-                    ->toArray();            
-    }   
+            ->where('email', '=', $email)
+            ->firstOrFail()
+            ->toArray();
+    }
 
-    public function findByCpf(string $cpf) : array
+    public function findByCpf(string $cpf): array
     {
         return $this->entity
-                    ->where('cpf', '=', $cpf)
-                    ->firstOrFail()
-                    ->toArray();            
-    }   
+            ->where('cpf', '=', $cpf)
+            ->firstOrFail()
+            ->toArray();
+    }
 }

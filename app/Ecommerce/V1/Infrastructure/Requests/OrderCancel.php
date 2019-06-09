@@ -12,14 +12,14 @@ class OrderCancel extends FormRequest
      * @return bool
      */
     public function authorize()
-    {             
+    {
         return true;
     }
 
     public function all($keys = null)
     {
         $data = parent::all($keys);
-        $data['order_id'] = $this->route('order_id');        
+        $data['order_id'] = $this->route('order_id');
         return $data;
     }
 
@@ -33,5 +33,5 @@ class OrderCancel extends FormRequest
         return [
             'order_id' => 'required|exists:orders,id'
         ];
-    }    
+    }
 }

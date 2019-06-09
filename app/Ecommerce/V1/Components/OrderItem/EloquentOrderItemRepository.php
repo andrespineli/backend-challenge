@@ -13,9 +13,9 @@ class EloquentOrderItemRepository extends EloquentRepository implements OrderIte
     public function __construct(OrderItem $entity)
     {
         $this->entity = $entity;
-    }  
+    }
 
-    public function createItems(array $items) : bool
+    public function createItems(array $items): bool
     {
         return $this->entity->insert($items);
     }

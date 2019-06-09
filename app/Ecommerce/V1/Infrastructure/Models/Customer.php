@@ -16,8 +16,8 @@ class Customer extends Authenticatable
      */
     protected $fillable = [
         'id',
-        'name', 
-        'cpf', 
+        'name',
+        'cpf',
         'email',
         'password',
         'api_token'
@@ -29,7 +29,7 @@ class Customer extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 
+        'password',
         'api_token',
         'remember_token',
         'created_at',

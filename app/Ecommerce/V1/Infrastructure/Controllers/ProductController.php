@@ -8,9 +8,9 @@ use App\Ecommerce\V1\Components\Product\ProductComponent;
 
 class ProductController extends Controller
 {
-    private $product; 
+    private $product;
 
-    public function __construct(ProductComponent $product) 
+    public function __construct(ProductComponent $product)
     {
         $this->product = $product;
     }
@@ -18,11 +18,11 @@ class ProductController extends Controller
     public function new(ProductNew $product)
     {
         $product = $product->validated();
-        return $this->product->newProduct($product);       
-    } 
+        return $this->product->newProduct($product);
+    }
 
     public function get()
     {
         return $this->product->getProducts();
-    }  
+    }
 }

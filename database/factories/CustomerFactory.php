@@ -7,8 +7,8 @@ use App\Ecommerce\V1\Infrastructure\Models\Customer;
 $factory->define(Customer::class, function (Faker $faker) {
 
     $faker->addProvider(new Person($faker));
-   
-    return [     
+
+    return [
         'name' => $faker->firstName(null),
         'cpf' => $faker->cpf(false),
         'email' => $faker->email(),

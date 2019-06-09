@@ -4,7 +4,6 @@ namespace App\Ecommerce\V1\Infrastructure\Controllers;
 
 use App\Ecommerce\V1\Infrastructure\Controllers\Controller;
 use App\Ecommerce\V1\Infrastructure\Requests\CustomerNew;
-use App\Ecommerce\V1\Infrastructure\Requests\CustomerLogIn;
 use App\Ecommerce\V1\Components\Customer\CustomerComponent;
 use App\Ecommerce\V1\Components\Auth\AuthComponent;
 
@@ -13,7 +12,7 @@ class CustomerController extends Controller
     private $customer;
     private $auth;
 
-    public function __construct(CustomerComponent $customer, AuthComponent $auth) 
+    public function __construct(CustomerComponent $customer, AuthComponent $auth)
     {
         $this->customer = $customer;
         $this->auth = $auth;
@@ -22,13 +21,12 @@ class CustomerController extends Controller
     public function new(CustomerNew $customer)
     {
         $customer = $customer->validated();
-        $new = $this->customer->newCustomer($customer);      
-        return $this->auth->logIn($new);       
-    } 
+        $new = $this->customer->newCustomer($customer);
+        return $this->auth->logIn($new);
+    }
 
     public function get()
     {
         return $this->customer->getCustomers();
     }
-  
 }

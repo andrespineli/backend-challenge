@@ -5,7 +5,7 @@ namespace App\Ecommerce\V1\Infrastructure\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderItem extends Model
-{     
+{
     /**
      * The attributes that are mass assignable.
      *
@@ -37,6 +37,4 @@ class OrderItem extends Model
     {
         return $this->hasOne('App\Ecommerce\V1\Infrastructure\Models\Product', 'id', 'product_id');
     }
-    
 }
-

@@ -9,8 +9,8 @@ class LaravelAuthRepository implements AuthRepository
 {
     protected $entity;
 
-    public function getAuthEntity() : array
+    public function getAuthEntity(): array
     {
-        return Auth::user()->toArray();       
+        return Auth::user()->toArray();
     }
 }

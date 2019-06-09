@@ -20,14 +20,13 @@ class OrderNew extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array
-     */    
+     */
     public function rules()
     {
-        return [                     
+        return [
             'items' => 'required',
             'items.*.sku' => 'required|integer|exists:products,sku',
             'items.*.amount' => 'required|integer|min:1'
         ];
     }
-   
 }

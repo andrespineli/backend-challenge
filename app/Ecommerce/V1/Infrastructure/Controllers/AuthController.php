@@ -10,7 +10,7 @@ class AuthController extends Controller
 {
     private $authComponent;
 
-    public function __construct(AuthComponent $authComponent) 
+    public function __construct(AuthComponent $authComponent)
     {
         $this->authComponent = $authComponent;
     }

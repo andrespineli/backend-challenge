@@ -13,22 +13,22 @@ class EloquentOrderRepository extends EloquentRepository implements OrderReposit
     public function __construct(Order $entity)
     {
         $this->entity = $entity;
-    }  
-
-    public function getOrderWithItems(int $orderId) : array
-    {
-        return $this->entity
-                    ->where('id', $orderId)
-                    ->with('buyer', 'items', 'items.product')
-                    ->first()
-                    ->toArray();
     }
 
-    public function getAllOrders() : array
+    public function getOrderWithItems(int $orderId): array
     {
         return $this->entity
-                    ->with('buyer', 'items', 'items.product')
-                    ->get()
-                    ->toArray();
+            ->where('id', $orderId)
+            ->with('buyer', 'items', 'items.product')
+            ->first()
+            ->toArray();
+    }
+
+    public function getAllOrders(): array
+    {
+        return $this->entity
+            ->with('buyer', 'items', 'items.product')
+            ->get()
+            ->toArray();
     }
 }

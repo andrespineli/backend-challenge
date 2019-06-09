@@ -13,13 +13,13 @@ class EloquentProductRepository extends EloquentRepository implements ProductRep
     public function __construct(Product $entity)
     {
         $this->entity = $entity;
-    }  
+    }
 
-    public function getProductBySku(int $sku) : array
+    public function getProductBySku(int $sku): array
     {
-       return $this->entity
-                   ->where('sku', $sku)
-                   ->first()
-                   ->toArray();
+        return $this->entity
+            ->where('sku', $sku)
+            ->first()
+            ->toArray();
     }
 }

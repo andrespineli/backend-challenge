@@ -21,10 +21,10 @@ class AuthLogIn extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array
-     */    
+     */
     public function rules()
     {
-        return [                       
+        return [
             'email' => 'required|email|exists:customers,email|max:255',
             'password' => 'required|string|max:255'
         ];
@@ -45,8 +45,6 @@ class AuthLogIn extends FormRequest
                 $validator->errors()->add("password", "Incorrect password for email {$this['email']}");
                 return;
             }
-            
         });
     }
-   
 }

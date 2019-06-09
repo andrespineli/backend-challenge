@@ -5,7 +5,7 @@ namespace App\Ecommerce\V1\Infrastructure\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
-{     
+{
     /**
      * The attributes that are mass assignable.
      *
@@ -36,6 +36,4 @@ class Order extends Model
     {
         return $this->belongsTo('App\Ecommerce\V1\Infrastructure\Models\Customer', 'customer_id');
     }
-    
 }
-

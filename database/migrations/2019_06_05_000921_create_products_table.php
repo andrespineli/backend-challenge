@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->bigInteger('sku')->unique();
             $table->string('name', 255)->unique();
-            $table->double('price', 8, 2);           
+            $table->double('price', 8, 2);
             $table->timestamps();
         });
     }
