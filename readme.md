@@ -38,6 +38,10 @@ Também sendo possível a execução como uma deamon (segundo plano) acrescentan
 docker-compose up -d
 ```
 
+Caso o ambiente utilizado seja linux, poderá ser necessário a execução dos comandos como sudo, além de conceder permissões no sistema de arquivos para execução correta do Laravel.
+
+Já em ambientes windows poderá ser necessário a utilização do prefixo winpty nos comandos docker.
+
 Devido a utilização do Docker os comandos do Laravel como o "php artisan" deverão ser executados no container challenge-php
 
 ### Instalando dependencias
