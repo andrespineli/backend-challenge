@@ -19,7 +19,7 @@ class Auth implements AuthComponent
 
     public function login(array $login): array
     {
-        $customer = $this->customerComponent->getCustomerByEmailAndPass($login['email'], $login['password']);
+        $customer = $this->customerComponent->getCustomerByEmail($login['email']);
 
         $token = $this->generateToken();
         $auth = $this->customerComponent->setAuthToken($customer['id'], $token);
@@ -41,5 +41,43 @@ class Auth implements AuthComponent
     public function getAuthEntity(): array
     {
         return $this->repository->getAuthEntity();
+    }
+
+    public function hashPassword($password)
+    {
+        return $this->repository->hashPassword($password);
+    }
+
+    public function verifyHashPassword($password, $hashedPass)
+    {
+        return $this->repository->verifyHashPassword($password, $hashedPass);
+    }
+
+    public function verifyEmailAndPass($email, $pass)
+    {
+        try {
+            $customer = $this->customerComponent->getCustomerByEmail($email);
+            $password = $this->repository->verifyHashPassword($pass, $customer['password']);
+
+            if (!$password) {
+                throw new \Exception("Incorrect password for email {$email}.", 1);
+            }
+
+            $verified['email'] = true;
+            $verified['password'] = true;
+            return $verified;
+        } catch (\Throwable $th) {
+            $verified['message'] = "Not found email.";
+            $verified['email'] = false;
+            $verified['field'] = 'email';
+
+            if ($th->getCode() == 1) {
+                $verified['message'] = $th->getMessage();
+                $verified['password'] = false;
+                $verified['field'] = 'password';
+            }
+
+            return $verified;
+        }
     }
 }

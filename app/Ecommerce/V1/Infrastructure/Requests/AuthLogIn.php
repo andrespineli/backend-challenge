@@ -4,9 +4,17 @@ namespace App\Ecommerce\V1\Infrastructure\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Ecommerce\V1\Infrastructure\Models\Customer;
+use Illuminate\Support\Facades\Hash;
+use App\Ecommerce\V1\Components\Auth\AuthComponent;
 
 class AuthLogIn extends FormRequest
 {
+    private $authComponent;
+
+    public function __construct(AuthComponent $authComponent)
+    {
+        $this->authComponent = $authComponent;
+    }
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -34,17 +42,13 @@ class AuthLogIn extends FormRequest
     {
         $validator->after(function ($validator) {
 
-            $customer = Customer::where('email', '=', $this['email'])->first();
+            $validate = $this->authComponent->verifyEmailAndPass($this['email'], $this['password']);
 
-            if (!$customer) {
-                $validator->errors()->add('email', 'Not found email.');
+            if (!$validate['email'] || !$validate['password']) {
+                $validator->errors()->add($validate['field'], $validate['message']);
                 return;
             }
 
-            if ($customer->password != $this['password']) {
-                $validator->errors()->add("password", "Incorrect password for email {$this['email']}");
-                return;
-            }
         });
     }
 }

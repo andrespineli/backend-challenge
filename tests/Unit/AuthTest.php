@@ -31,7 +31,7 @@ class AuthTest extends TestCase
         $customer = factory($this->entity)->create()
             ->makeVisible('password')
             ->toArray();
-
+ 
         $login = $this->authComponent->login($customer);
         $this->assertArrayHasKey('api_token', $login);
         $this->assertNotEmpty($login['api_token']);

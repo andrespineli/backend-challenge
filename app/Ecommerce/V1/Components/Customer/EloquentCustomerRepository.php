@@ -37,6 +37,7 @@ class EloquentCustomerRepository extends EloquentRepository implements CustomerR
         return $this->entity
             ->where('email', '=', $email)
             ->firstOrFail()
+            ->makeVisible('password')
             ->toArray();
     }
 

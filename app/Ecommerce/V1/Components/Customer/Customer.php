@@ -24,7 +24,7 @@ class Customer implements CustomerComponent
         return $this->repository->all();
     }
 
-    public function getCustomerByEmailAndPass(string $email, string $pass): array
+    public function getCustomerByEmail(string $email): array
     {
         return $this->repository->findByEmail($email);
     }

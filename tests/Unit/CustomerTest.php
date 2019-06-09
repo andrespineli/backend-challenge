@@ -44,10 +44,9 @@ class CustomerTest extends TestCase
     public function testItCanGetCustomerByEmailAndPass()
     {
         $mock = factory($this->entity)->create()
-            ->makeVisible('password')
             ->toArray();
 
-        $customer = $this->customerComponent->getCustomerByEmailAndPass($mock['email'], $mock['password']);
+        $customer = $this->customerComponent->getCustomerByEmail($mock['email']);
 
         unset($mock['password']);
 

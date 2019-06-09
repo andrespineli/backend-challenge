@@ -21,6 +21,7 @@ class CustomerController extends Controller
     public function new(CustomerNew $customer)
     {
         $customer = $customer->validated();
+        $customer['password'] = $this->auth->hashPassword($customer['password']);
         $new = $this->customer->newCustomer($customer);
         return $this->auth->logIn($new);
     }

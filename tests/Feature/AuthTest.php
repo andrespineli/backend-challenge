@@ -13,8 +13,9 @@ class AuthTest extends TestCase
     public function testItCanLogin()
     {
         $customer = factory(Customer::class)->create()
-            ->makeVisible('password')
             ->toArray();
+            
+        $customer['password'] = '123456';
 
         $this->json('POST', '/api/v1/login', $customer)
             ->assertStatus(200)
