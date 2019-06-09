@@ -8,10 +8,11 @@ use App\Ecommerce\V1\Infrastructure\Models\Product;
 $factory->define(OrderItem::class, function (Faker $faker) {
 
     factory(Product::class, 5)->create();
+    factory(Order::class, 5)->create();
 
-    $order = Order::find(rand(1, Order::count()))->first();
+    $order = Order::inRandomOrder()->first();
     $amount = rand(1, 5);
-    $product = Product::find(rand(1, Product::count()))->first();
+    $product = Product::inRandomOrder()->first();
     $total = $product->price * $amount;
     $order->total = $order->total + $total;
     $order->save();

@@ -10,8 +10,8 @@ $factory->define(Customer::class, function (Faker $faker) {
 
     return [
         'name' => $faker->firstName(null),
-        'cpf' => $faker->cpf(false),
-        'email' => $faker->email(),
+        'cpf' => $faker->unique()->cpf(false),
+        'email' => $faker->unique()->email() . $faker->unique()->numberBetween(0000, 9999),
         'password' => '123456',
         'api_token' => sha1(str_random(32)) . '.' . sha1(str_random(32))
     ];

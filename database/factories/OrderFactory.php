@@ -9,7 +9,7 @@ $factory->define(Order::class, function (Faker $faker) {
     factory(Customer::class, 5)->create();
 
     return [
-        'customer_id' => Customer::find(rand(1, 5))->id,
+        'customer_id' => Customer::inRandomOrder()->first()->id,
         'total' => 0,
         'status' => 'CONCLUDED'
     ];
