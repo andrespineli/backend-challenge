@@ -46,7 +46,7 @@ Devido a utilização do Docker os comandos do Laravel como o "php artisan" deve
 
 ### Instalando dependencias
 
-O Laravel gerencia suas dependencias através do Composer
+O Laravel gerencia suas dependencias através do Composer.
 As dependencias do projeto devem ser instaladas através do comando:
 
 ```
@@ -70,6 +70,7 @@ docker exec -it challenge-php php artisan migrate:refresh
 ### Executando os testes
 
 Foram implementados testes unitários e de integração (Rotas da API).
+O ambiente de testes foi configurado utilizando SQLite em memória.
 Para executar a suite de testes basta utilizar o PHPUnit:
 
 ```
