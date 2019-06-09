@@ -32,14 +32,21 @@ class OrderTest extends TestCase
             ->toArray();
 
         foreach ($products as $product) {
+            $amount = rand(1, 5);
             $item['sku'] = $product['sku'];
-            $item['amount'] = rand(1, 5);
+            $item['amount'] = "{$amount}";
             $items['items'][] = $item;
         }
-
+      
         $order = $this->orderComponent->newOrder($items);
-        $this->assertNotEmpty($order);
         $this->assertArrayHasKey('id', $order);
+        $this->assertArrayHasKey('total', $order);
+        $this->assertArrayHasKey('status', $order);
+        $this->assertArrayHasKey('created_at', $order);
+        $this->assertArrayHasKey('updated_at', $order);
+        $this->assertArrayHasKey('buyer', $order);
+        $this->assertArrayHasKey('items', $order);
+        $this->assertNotEmpty($order['items']);
     }
 
     public function testItCanGetAllOrders()
